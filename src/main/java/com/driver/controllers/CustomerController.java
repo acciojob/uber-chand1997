@@ -28,8 +28,14 @@ public class CustomerController {
 	public ResponseEntity<Integer> bookTrip(@RequestParam Integer customerId, @RequestParam String fromLocation,
 											@RequestParam String toLocation, @RequestParam Integer distanceInKm) throws Exception {
 //		return new ResponseEntity<>(bookedTrip.getTripBookingId(), HttpStatus.CREATED);
-		customerService.bookTrip(customerId,fromLocation,toLocation,distanceInKm);
-		return null;
+		try{
+			TripBooking tripBooking=customerService.bookTrip(customerId,fromLocation,toLocation,distanceInKm);
+			return new ResponseEntity<Integer>(tripBooking.getTripBookingId(),HttpStatus.CREATED);
+		}catch(Exception e){
+			return null;
+		}
+
+
 	}
 
 	@DeleteMapping("/complete")
