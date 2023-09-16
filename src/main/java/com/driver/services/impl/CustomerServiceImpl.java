@@ -15,7 +15,6 @@ import com.driver.repository.DriverRepository;
 import com.driver.repository.TripBookingRepository;
 import com.driver.model.TripStatus;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -66,7 +65,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 		int minId=Integer.MAX_VALUE;
 		for(Driver d:driverList){
-			if(d.getCab().isAvailable())
+			if(d.getCab().getAvailable())
 			minId=Math.min(minId,d.getDriverId());
 		}
 
