@@ -70,6 +70,9 @@ public class CustomerServiceImpl implements CustomerService {
 		}
 
 		Optional<Driver> optionalDriver=driverRepository2.findById(minId);
+		if(!optionalDriver.isPresent()){
+			throw new NoCabAvailableException("No value present");
+		}
 		Driver driver=optionalDriver.get();
 
 		tripBooking.setDriver(driver);
