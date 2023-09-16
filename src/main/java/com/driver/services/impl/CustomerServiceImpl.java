@@ -54,14 +54,14 @@ public class CustomerServiceImpl implements CustomerService {
 
 		Optional<Customer> optionalCustomer=customerRepository2.findById(customerId);
 		if(!optionalCustomer.isPresent()){
-			throw new CustomerNotFoundException("Invalid Customer-Id");
+			throw new CustomerNotFoundException("No cab available!");
 		}
 
 			Customer customer=optionalCustomer.get();
 			tripBooking.setCustomer(customer);
 
 		List<Driver> driverList=driverRepository2.findAll();
-		if(driverList.isEmpty()) throw new NoCabAvailableException("No Driver Registered");
+		if(driverList.isEmpty()) throw new NoCabAvailableException("No cab available!");
 
 		int minId=Integer.MAX_VALUE;
 		for(Driver d:driverList){
@@ -98,7 +98,7 @@ public class CustomerServiceImpl implements CustomerService {
 		//Cancel the trip having given trip Id and update TripBooking attributes accordingly
 		Optional<TripBooking> optionalTripBooking=tripBookingRepository2.findById(tripId);
 		if(!optionalTripBooking.isPresent()){
-			throw new TripBookingNotAvailableException("Invalid TripBooking-Id");
+			throw new TripBookingNotAvailableException("No cab available!");
 		}
 		TripBooking tripBooking=optionalTripBooking.get();
 		tripBookingRepository2.delete(tripBooking);
@@ -123,7 +123,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 		Optional<TripBooking> optionalTripBooking=tripBookingRepository2.findById(tripId);
 		if(!optionalTripBooking.isPresent()){
-			throw new TripBookingNotAvailableException("Invalid TripBooking-Id");
+			throw new TripBookingNotAvailableException("No cab available!");
 		}
 		TripBooking tripBooking=optionalTripBooking.get();
 		tripBookingRepository2.delete(tripBooking);
