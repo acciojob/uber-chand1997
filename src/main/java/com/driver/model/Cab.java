@@ -27,11 +27,11 @@ public class Cab {
 
     }
 
-    public int getCabId() {
+    public int getId() {
         return cabId;
     }
 
-    public void setCabId(int cabId) {
+    public void setId(int cabId) {
         this.cabId = cabId;
     }
 
