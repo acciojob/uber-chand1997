@@ -41,7 +41,10 @@ public class DriverServiceImpl implements DriverService {
 	@Override
 	public void removeDriver(int driverId){
 		// Delete driver without using deleteById function
-        driverRepository3.deleteById(driverId);
+       Optional<Driver> optionalDriver=driverRepository3.findById(driverId);
+	   if(optionalDriver.isPresent()){
+		   driverRepository3.delete(optionalDriver.get());
+	   }
 	}
 
 	@Override
