@@ -60,20 +60,24 @@ public class CustomerServiceImpl implements CustomerService {
 			Customer customer=optionalCustomer.get();
 			tripBooking.setCustomer(customer);
 
-		List<Driver> driverList=driverRepository2.findAll();
-		if(driverList.isEmpty()) throw new NoCabAvailableException("No cab available!");
+//		List<Driver> driverList=driverRepository2.findAll();
+//		if(driverList.isEmpty()) throw new NoCabAvailableException("No cab available!");
+//
+//		int minId=Integer.MAX_VALUE;
+//		for(Driver d:driverList){
+//			if(d.getCab().getAvailable())
+//			minId=Math.min(minId,d.getDriverId());
+//		}
+//
+//		Optional<Driver> optionalDriver=driverRepository2.findById(minId);
+//		if(!optionalDriver.isPresent()){
+//			throw new NoCabAvailableException("No value present");
+//		}
+//		Driver driver=optionalDriver.get();
 
-		int minId=Integer.MAX_VALUE;
-		for(Driver d:driverList){
-			if(d.getCab().getAvailable())
-			minId=Math.min(minId,d.getDriverId());
-		}
+		Driver driver=driverRepository2.findDriverWithLeastId();
 
-		Optional<Driver> optionalDriver=driverRepository2.findById(minId);
-		if(!optionalDriver.isPresent()){
-			throw new NoCabAvailableException("No value present");
-		}
-		Driver driver=optionalDriver.get();
+		if(driver==null) throw new NoCabAvailableException("No cab available!");
 
 		tripBooking.setDriver(driver);
 		driver.getCab().setAvailable(false);
